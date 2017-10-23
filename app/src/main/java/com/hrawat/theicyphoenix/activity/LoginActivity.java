@@ -36,7 +36,8 @@ import java.security.NoSuchAlgorithmException;
 /**
  * A login screen that offers login via google/fb sign in.
  */
-public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class LoginActivity extends AppCompatActivity implements
+        GoogleApiClient.OnConnectionFailedListener {
 
     private final String TAG = this.getClass().getSimpleName();
     private static final int RC_SIGN_IN = 9001;
