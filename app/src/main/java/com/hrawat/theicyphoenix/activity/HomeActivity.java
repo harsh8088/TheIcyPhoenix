@@ -23,14 +23,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hrawat.theicyphoenix.R;
+import com.hrawat.theicyphoenix.activity.utils.BitmapUtils;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
     private EditText editText;
+    private String mediaPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,16 +76,17 @@ public class HomeActivity extends AppCompatActivity
         // Without it the view will have a dimension of 0,0 and the bitmap will be null
         root.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
                 View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-        root.layout(0, 0, 550, 600);
+        root.layout(0, 0, root.getMeasuredWidth(), root.getMeasuredHeight());
         root.buildDrawingCache(true);
-        Bitmap b = Bitmap.createBitmap(root.getDrawingCache());
+        Bitmap bitmap = Bitmap.createBitmap(root.getDrawingCache());
+//        Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 566, 600, false);
         root.setDrawingCacheEnabled(false); // clear drawing cache
-        showFilterDialog(b);
+        showImageDialog(bitmap);
     }
 
-    private void showFilterDialog(Bitmap bitmap) {
+    private void showImageDialog(final Bitmap bitmap) {
         final Dialog dialog = new Dialog(this);
-        dialog.setTitle("Filter by");
+        dialog.setTitle("Preview Image");
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.preview_dialog);
         Button btnShare = dialog.findViewById(R.id.btn_share);
@@ -92,6 +97,22 @@ public class HomeActivity extends AppCompatActivity
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPath = BitmapUtils.scaledImagePath();
+                FileOutputStream fos = null;
+                try {
+                    fos = new FileOutputStream(mediaPath);
+                    // Use the compress method on the BitMap object to write image to the OutputStream
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        fos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                createInstagramIntent("image/*", mediaPath);
                 dialog.dismiss();
             }
         });
