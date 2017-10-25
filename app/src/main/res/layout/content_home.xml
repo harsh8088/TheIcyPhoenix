@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context="com.hrawat.theicyphoenix.activity.HomeActivity"
     tools:showIn="@layout/app_bar_home">
 
@@ -25,8 +24,7 @@
             android:minLines="5"
             android:padding="4dp"
             android:textColor="@color/cool_grey"
-            android:textSize="16sp"
-            />
+            android:textSize="20sp"/>
 
         <Button
             android:id="@+id/btn_preview"
@@ -37,9 +35,5 @@
             android:background="@drawable/btn_round"
             android:text="Preview"
             android:textColor="@color/white"/>
-
-
     </LinearLayout>
-
-
 </LinearLayout>
