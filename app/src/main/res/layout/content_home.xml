@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.hrawat.theicyphoenix.activity.HomeActivity"
-    tools:showIn="@layout/app_bar_home">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,9 +21,10 @@
             android:layout_gravity="center"
             android:background="@drawable/edit_note_background"
             android:hint="What's on your mind!!!"
+            android:maxLines="8"
             android:minLines="5"
-            android:padding="4dp"
-            android:textColor="@color/cool_grey"
+            android:padding="6dp"
+            android:textColor="@color/light_black"
             android:textSize="20sp"/>
 
         <Button

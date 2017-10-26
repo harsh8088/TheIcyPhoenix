@@ -6,14 +6,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,10 +24,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
     private EditText editText;
     private String mediaPath;
 
@@ -40,19 +33,12 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         init();
     }
 
     private void init() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         editText = (EditText) findViewById(R.id.et_text);
         Button buttonPreview = (Button) findViewById(R.id.btn_preview);
         buttonPreview.setOnClickListener(new View.OnClickListener() {
@@ -80,10 +66,14 @@ public class HomeActivity extends AppCompatActivity
                 View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
         root.layout(0, 0, root.getMeasuredWidth(), root.getMeasuredHeight());
         root.buildDrawingCache(true);
-        Bitmap bitmap = Bitmap.createBitmap(root.getDrawingCache());
+        if (root.getDrawingCache() != null) {
+            Bitmap bitmap = Bitmap.createBitmap(root.getDrawingCache());
 //        Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 566, 600, false);
-        root.setDrawingCacheEnabled(false); // clear drawing cache
-        showImageDialog(bitmap);
+            root.setDrawingCacheEnabled(false); // clear drawing cache
+            showImageDialog(bitmap);
+        } else {
+            Toast.makeText(HomeActivity.this, "Please make your content short", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void showImageDialog(final Bitmap bitmap) {
@@ -138,29 +128,5 @@ public class HomeActivity extends AppCompatActivity
         share.putExtra(Intent.EXTRA_STREAM, uri);
         // Broadcast the Intent.
         startActivity(Intent.createChooser(share, "Share to"));
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        if (id == R.id.nav_manage) {
-        } else if (id == R.id.nav_share) {
-        } else if (id == R.id.nav_send) {
-        }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 }
