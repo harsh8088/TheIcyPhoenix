@@ -9,4 +9,24 @@
     <string name="facebook_app_id">803658216475720</string>
     <string name="text_the_icy_phoenix">The Icy Phoenix</string>
     <!-- Strings related to login -->
+    <string-array name="font_array">
+        <item>Roboto</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
+    <string-array name="font_size_array">
+        <item>12</item>
+        <item>14</item>
+        <item>16</item>
+        <item>18</item>
+        <item>20</item>
+        <item>22</item>
+        <item>26</item>
+        <item>28</item>
+    </string-array>
 </resources>

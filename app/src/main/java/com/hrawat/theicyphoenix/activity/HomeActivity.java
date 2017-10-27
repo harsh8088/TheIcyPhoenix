@@ -10,10 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +51,44 @@ public class HomeActivity extends AppCompatActivity {
                     startCovertingImage();
                 else
                     Toast.makeText(HomeActivity.this, "No text found!!!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        Spinner spinnerFont = (Spinner) findViewById(R.id.spinner_font);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        final ArrayAdapter<CharSequence> adapterFont = ArrayAdapter.createFromResource(this,
+                R.array.font_array, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapterFont.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinnerFont.setAdapter(adapterFont);
+        spinnerFont.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+        Spinner spinnerFontSize = (Spinner) findViewById(R.id.spinner_font_size);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        final ArrayAdapter<CharSequence> adapterFontSize = ArrayAdapter.createFromResource(this,
+                R.array.font_size_array, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapterFontSize.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinnerFontSize.setAdapter(adapterFontSize);
+        spinnerFontSize.setSelection(4);
+        spinnerFontSize.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (adapterView.getSelectedItem() != null) {
+                    editText.setTextSize(Float.parseFloat(adapterView.getSelectedItem().toString()));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
     }
