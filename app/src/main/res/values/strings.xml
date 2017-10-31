@@ -11,13 +11,16 @@
     <!-- Strings related to login -->
     <string-array name="font_array">
         <item>Roboto</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+        <item>Open Sans</item>
+        <item>Great Vibes</item>
+        <item>Quicksand</item>
+        <item>Raleway</item>
+        <item>Aller</item>
+        <item>GoodDog</item>
+        <item>Lobster</item>
+        <item>Allura</item>
+        <item>Kaushan Script</item>
+        <item>Nexa Rust</item>
     </string-array>
     <string-array name="font_size_array">
         <item>12</item>
