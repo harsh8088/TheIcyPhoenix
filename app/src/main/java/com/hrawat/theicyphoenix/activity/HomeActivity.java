@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -33,6 +32,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private EditText editText;
     private String mediaPath;
+    Spinner spinnerFontSize;
+    Spinner spinnerFont;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
                     Toast.makeText(HomeActivity.this, "No text found!!!", Toast.LENGTH_SHORT).show();
             }
         });
-        Spinner spinnerFont = (Spinner) findViewById(R.id.spinner_font);
+        spinnerFont = (Spinner) findViewById(R.id.spinner_font);
 // Create an ArrayAdapter using the string array and a default spinner layout
         final ArrayAdapter<CharSequence> adapterFont = ArrayAdapter.createFromResource(this,
                 R.array.font_array, android.R.layout.simple_spinner_item);
@@ -67,43 +68,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (adapterView.getSelectedItem() != null) {
-                    switch (adapterView.getSelectedItem().toString()) {
-                        case "Roboto":
-                            Typeface tfRoboto = Typeface.createFromAsset(getAssets(),
-                                    "fonts/epimodem.ttf");
-                            editText.setTypeface(tfRoboto);
-                            break;
-                        case "Open Sans":
-                            break;
-                        case "Great Vibes":
-                            break;
-                        case "Quicksand":
-                            break;
-                        case "Raleway":
-                            break;
-                        case "Aller":
-                            Typeface tfAller = ResourcesCompat.getFont(HomeActivity.this,
-                                    R.font.my_font);
-                            editText.setTypeface(tfAller);
-                            break;
-                        case "GoodDog":
-                            Typeface tfGoodDog = Typeface.createFromAsset(getAssets(),
-                                    "fonts/good_dog.ttf");
-                            editText.setTypeface(tfGoodDog);
-                            break;
-                        case "Lobster":
-                            break;
-                        case "Allura":
-                            Typeface tfAllura = Typeface.createFromAsset(getAssets(),
-                                    "fonts/allura-regular.ttf");
-                            editText.setTypeface(tfAllura);
-                            break;
-                        case "Kaushan Script":
-                            Typeface tfKaushanS = Typeface.createFromAsset(getAssets(),
-                                    "fonts/kaushan_script-regular.ttf");
-                            editText.setTypeface(tfKaushanS);
-                            break;
-                    }
+                    Typeface typeface = getFontTypeFace(adapterView.getSelectedItem().toString());
+                    if (typeface != null)
+                        editText.setTypeface(typeface);
                 }
             }
 
@@ -111,7 +78,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-        Spinner spinnerFontSize = (Spinner) findViewById(R.id.spinner_font_size);
+        spinnerFontSize = (Spinner) findViewById(R.id.spinner_font_size);
 // Create an ArrayAdapter using the string array and a default spinner layout
         final ArrayAdapter<CharSequence> adapterFontSize = ArrayAdapter.createFromResource(this,
                 R.array.font_size_array, android.R.layout.simple_spinner_item);
@@ -134,12 +101,63 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    private Typeface getFontTypeFace(String font) {
+        Typeface typeface = null;
+        switch (font) {
+            case "Open Sans":
+                typeface = Typeface.createFromAsset(getAssets(),
+                        "fonts/font_open_sans.ttf");
+                break;
+            case "Quicksand":
+                typeface = Typeface.createFromAsset(getAssets(),
+                        "fonts/font_quicksand.otf");
+                break;
+            case "Raleway":
+                typeface = Typeface.createFromAsset(getAssets(),
+                        "fonts/font_raleway.ttf");
+                break;
+            case "Aller":
+                typeface = Typeface.createFromAsset(getAssets(),
+                        "fonts/font_aller.ttf");
+                break;
+            case "GoodDog":
+                typeface = Typeface.createFromAsset(getAssets(),
+                        "fonts/font_good_dog.otf");
+                break;
+            case "Lobster":
+                typeface = Typeface.createFromAsset(getAssets(),
+                        "fonts/font_lobster.otf");
+                break;
+            case "Allura":
+                typeface = Typeface.createFromAsset(getAssets(),
+                        "fonts/font_allura.otf");
+                break;
+            case "Kaushan Script":
+                typeface = Typeface.createFromAsset(getAssets(),
+                        "fonts/font_kaushan.otf");
+                break;
+            case "Roboto":
+            default:
+                typeface = Typeface.createFromAsset(getAssets(),
+                        "fonts/font_roboto.ttf");
+                break;
+        }
+        return typeface;
+    }
+
     private void startCovertingImage() {
         View viewRoot;
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         viewRoot = inflater.inflate(R.layout.template_t1, null);
-        LinearLayout root = (LinearLayout) viewRoot.findViewById(R.id.parent_ti);
+        LinearLayout root = viewRoot.findViewById(R.id.parent_ti);
         TextView text = viewRoot.findViewById(R.id.tv_text);
+        TextView textBottom = viewRoot.findViewById(R.id.tv_bottom);
+        Typeface typeface = getFontTypeFace(spinnerFont.getSelectedItem().toString());
+        if (typeface != null) {
+            text.setTypeface(typeface);
+            textBottom.setTypeface(typeface);
+            text.setTextSize(Float.parseFloat(spinnerFontSize.getSelectedItem().toString()));
+        }
         text.setText(editText.getText().toString());
         root.setDrawingCacheEnabled(true);
         // this is the important code :)

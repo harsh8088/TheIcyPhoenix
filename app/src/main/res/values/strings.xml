@@ -20,7 +20,6 @@
         <item>Lobster</item>
         <item>Allura</item>
         <item>Kaushan Script</item>
-        <item>Nexa Rust</item>
     </string-array>
     <string-array name="font_size_array">
         <item>12</item>
@@ -31,5 +30,7 @@
         <item>22</item>
         <item>26</item>
         <item>28</item>
+        <item>32</item>
+        <item>36</item>
     </string-array>
 </resources>

@@ -53,9 +53,9 @@
             android:background="@android:color/transparent"
             android:hint="What's on your mind!!!"
             android:maxLines="8"
-            android:minHeight="150dp"
+            android:minHeight="180dp"
             android:minLines="5"
-            android:padding="6dp"
+            android:padding="8dp"
             android:textColor="@color/light_black"
             android:textSize="20sp"/>
     </LinearLayout>
