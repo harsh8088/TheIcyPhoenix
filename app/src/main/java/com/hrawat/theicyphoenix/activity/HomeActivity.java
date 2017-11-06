@@ -86,7 +86,7 @@ public class HomeActivity extends AppCompatActivity {
         adapterFontSize.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
         spinnerFontSize.setAdapter(adapterFontSize);
-        spinnerFontSize.setSelection(4);
+        spinnerFontSize.setSelection(2);
         spinnerFontSize.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -153,10 +153,13 @@ public class HomeActivity extends AppCompatActivity {
         TextView text = viewRoot.findViewById(R.id.tv_text);
         TextView textBottom = viewRoot.findViewById(R.id.tv_bottom);
         Typeface typeface = getFontTypeFace(spinnerFont.getSelectedItem().toString());
+        Float textSize = Float.parseFloat(spinnerFontSize.getSelectedItem().toString());
+        Float bottomTextSize = textSize - 4;
         if (typeface != null) {
             text.setTypeface(typeface);
-            textBottom.setTypeface(typeface);
-            text.setTextSize(Float.parseFloat(spinnerFontSize.getSelectedItem().toString()));
+//            textBottom.setTypeface(typeface);
+//            textBottom.setTextSize(bottomTextSize);
+            text.setTextSize(textSize);
         }
         text.setText(editText.getText().toString());
         root.setDrawingCacheEnabled(true);
@@ -168,7 +171,6 @@ public class HomeActivity extends AppCompatActivity {
         root.buildDrawingCache(true);
         if (root.getDrawingCache() != null) {
             Bitmap bitmap = Bitmap.createBitmap(root.getDrawingCache());
-//        Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 566, 600, false);
             root.setDrawingCacheEnabled(false); // clear drawing cache
             showImageDialog(bitmap);
         } else {

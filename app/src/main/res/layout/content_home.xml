@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="5dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
     tools:context="com.hrawat.theicyphoenix.activity.HomeActivity"
     >
 
@@ -11,10 +16,10 @@
         android:id="@+id/ll_center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_margin="5dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/edit_note_background"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="4dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -55,7 +60,9 @@
             android:maxLines="8"
             android:minHeight="180dp"
             android:minLines="5"
-            android:padding="8dp"
+            android:overScrollMode="always"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
             android:textColor="@color/light_black"
             android:textSize="20sp"/>
     </LinearLayout>
@@ -64,10 +71,8 @@
         android:id="@+id/btn_preview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/ll_center"
-        android:layout_alignRight="@+id/ll_center"
-        android:layout_below="@+id/ll_center"
+        android:layout_gravity="end"
         android:background="@drawable/btn_round"
         android:text="Preview"
         android:textColor="@color/white"/>
-</RelativeLayout>
+</LinearLayout>

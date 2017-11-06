@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/parent_ti"
-    android:layout_width="566dp"
+    android:layout_width="wrap_content"
     android:layout_height="600dp"
     android:background="@color/icy_phoenix"
     >
@@ -37,7 +37,7 @@
             android:padding="4dp"
             android:text="@string/text_the_icy_phoenix"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="italic"/>
     </LinearLayout>
 </LinearLayout>

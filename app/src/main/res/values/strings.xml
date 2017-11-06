@@ -22,15 +22,12 @@
         <item>Kaushan Script</item>
     </string-array>
     <string-array name="font_size_array">
-        <item>12</item>
-        <item>14</item>
-        <item>16</item>
-        <item>18</item>
-        <item>20</item>
-        <item>22</item>
         <item>26</item>
         <item>28</item>
+        <item>30</item>
         <item>32</item>
+        <item>34</item>
         <item>36</item>
+        <item>38</item>
     </string-array>
 </resources>
